@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital MAR Documentation Training</title>
+<style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 40px; }
+    h1 { color: forestgreen; font-size: 2em; font-weight: bold; }
+    p { color: #555; font-size: 1.2em; font-weight: bold; }
+    #checkmark { display: none; font-size: 3em; color: forestgreen; margin-top: 20px; }
+    #test-section { display: none; margin-top: 30px; }
+</style>
+</head>
+<body>
+    <h1>Welcome to Digital MAR Documentation Training</h1>
+    <p>Please watch the entire video. Once completed please take the exit test. Thank you.</p>
+
+    <!-- Embedded YouTube Video -->
+    <div>
+        <iframe id="trainingVideo" width="560" height="315" src="https://www.youtube.com/embed/MfhfOUhGt8Q?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <!-- Green Checkmark -->
+    <div id="checkmark">✔</div>
+
+    <!-- Test Section -->
+    <div id="test-section">
+        <script>(function(t,e,s,n){var o,a,c;t.SMCX=t.SMCX||[],e.getElementById(n)||(o=e.getElementsByTagName(s),a=o[o.length-1],c=e.createElement(s),c.type="text/javascript",c.async=!0,c.id=n,c.src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd2IUF_2BzdC396tT6jqDxdOodX9xhs5KnAgU6wfxd7H28_2F.js",a.parentNode.insertBefore(c,a))})(window,document,"script","smcx-sdk");</script>
+        <a style="font: 12px Helvetica, sans-serif; color: #999; text-decoration: none;" href="https://www.surveymonkey.com">Create your own user feedback survey</a>
+    </div>
+
+    <script>
+        // Load YouTube IFrame API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('trainingVideo', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                document.getElementById('checkmark').style.display = 'block';
+                document.getElementById('test-section').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
