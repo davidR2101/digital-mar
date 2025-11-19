@@ -29,14 +29,16 @@
 
     <!-- Test Section -->
     <div id="test-section">
-        <script>(function(t,e,s,n){var o,a,c;t.SMCX=t.SMCX||[],e.getElementById(n)||(o=e.getElementsByTagName(s),a=o[o.length-1],c=e.createElement(s),c.type="text/javascript",c.async=!0,c.id=n,c.src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd2IUF_2BzdC396tT6jqDxdOodX9xhs5KnAgU6wfxd7H28_2F.js",a.parentNode.insertBefore(c,a))})(window,document,"script","smcx-sdk");</script>
-        <a style="font: 12px Helvetica, sans-serif; color: #999; text-decoration: none;" href="https://www.surveymonkey.com">Create your own user feedback survey</a>
+        <div id="survey-container">
+            <script id="smcx-sdk-script">(function(t,e,s,n){var o,a,c;t.SMCX=t.SMCX||[],e.getElementById(n)||(o=e.getElementsByTagName(s),a=o[o.length-1],c=e.createElement(s),c.type="text/javascript",c.async=!0,c.id=n,c.src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd2IUF_2BzdC396tT6jqDxdOodX9xhs5KnAgU6wfxd7H28_2F.js",a.parentNode.insertBefore(c,a))})(window,document,"script","smcx-sdk");</script>
+            <a style="font: 12px Helvetica, sans-serif; color: #999; text-decoration: none;" href="https://www.surveymonkey.com">Create your own user feedback survey</a>
+        </div>
     </div>
 
     <!-- Retake Section -->
     <div id="retake-section">
         <p>If you did not score 100%, please click link and try again.</p>
-        <button class="retake-btn" onclick="scrollToTest()">Click here to retake test</button>
+        <button class="retake-btn" onclick="reloadSurvey()">Click here to retake test</button>
     </div>
 
     <script>
@@ -63,7 +65,27 @@
             }
         }
 
-        function scrollToTest() {
+        function reloadSurvey() {
+            var container = document.getElementById('survey-container');
+            container.innerHTML = ''; // Remove old survey
+
+            // Recreate script dynamically
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = 'https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd2IUF_2BzdC396tT6jqDxdOodX9xhs5KnAgU6wfxd7H28_2F.js';
+            container.appendChild(script);
+
+            // Add link again
+            var link = document.createElement('a');
+            link.style.font = '12px Helvetica, sans-serif';
+            link.style.color = '#999';
+            link.style.textDecoration = 'none';
+            link.href = 'https://www.surveymonkey.com';
+            link.textContent = 'Create your own user feedback survey';
+            container.appendChild(link);
+
+            // Scroll back to test section
             document.getElementById('test-section').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
