@@ -9,10 +9,9 @@
     h1 { color: forestgreen; font-size: 2em; font-weight: bold; }
     p { color: #555; font-size: 1.2em; font-weight: bold; }
     #checkmark { display: none; font-size: 3em; color: forestgreen; margin-top: 20px; }
-    #test-section { display: none; margin-top: 30px; }
-    .retake-section { margin-top: 20px; }
-    .retake-btn { background-color: forestgreen; color: white; padding: 10px 20px; font-size: 1em; font-weight: bold; border: none; cursor: pointer; border-radius: 5px; }
-    .retake-btn:hover { background-color: #228B22; }
+    #retake-section { display: none; margin-top: 30px; }
+    .nav-btn { background-color: forestgreen; color: white; padding: 10px 20px; font-size: 1em; font-weight: bold; border: none; cursor: pointer; border-radius: 5px; }
+    .nav-btn:hover { background-color: #228B22; }
 </style>
 </head>
 <body>
@@ -27,9 +26,10 @@
     <!-- Green Checkmark -->
     <div id="checkmark">✔</div>
 
-    <!-- Test Section -->
-    <div id="test-section">
-        <div id="survey-container"></div>
+    <!-- Retake Section -->
+    <div id="retake-section">
+        <p>You may now proceed to the exit test.</p>
+        <button class="nav-btn" onclick="goToTest()">Go to Exit Test</button>
     </div>
 
     <script>
@@ -51,49 +51,12 @@
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.ENDED) {
                 document.getElementById('checkmark').style.display = 'block';
-                document.getElementById('test-section').style.display = 'block';
-                loadSurvey();
+                document.getElementById('retake-section').style.display = 'block';
             }
         }
 
-        function loadSurvey() {
-            var container = document.getElementById('survey-container');
-            container.innerHTML = ''; // Clear previous content
-
-            // Create SurveyMonkey script dynamically
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.async = true;
-            script.src = 'https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd2IUF_2BzdC396tT6jqDxdOodX9xhs5KnAgU6wfxd7H28_2F.js';
-            container.appendChild(script);
-
-            // Add link
-            var link = document.createElement('a');
-            link.style.font = '12px Helvetica, sans-serif';
-            link.style.color = '#999';
-            link.style.textDecoration = 'none';
-            link.href = 'https://www.surveymonkey.com';
-            link.textContent = 'Create your own user feedback survey';
-            container.appendChild(link);
-
-            // Add retake section below
-            var retakeDiv = document.createElement('div');
-            retakeDiv.className = 'retake-section';
-
-            var instruction = document.createElement('p');
-            instruction.textContent = 'If you did not score 100%, please click link and try again.';
-            retakeDiv.appendChild(instruction);
-
-            var button = document.createElement('button');
-            button.className = 'retake-btn';
-            button.textContent = 'Click here to retake test';
-            button.onclick = function() {
-                loadSurvey(); // Reload survey for a fresh attempt
-                container.scrollIntoView({ behavior: 'smooth' });
-            };
-            retakeDiv.appendChild(button);
-
-            container.appendChild(retakeDiv);
+        function goToTest() {
+            window.location.href = 'test.html';
         }
     </script>
 </body>

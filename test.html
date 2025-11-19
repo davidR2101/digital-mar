@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital MAR Exit Test</title>
+<style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 40px; }
+    h1 { color: forestgreen; font-size: 2em; font-weight: bold; margin-bottom: 20px; }
+    #survey-container { margin-top: 20px; }
+    .nav-section { margin-top: 30px; }
+    .nav-btn { background-color: forestgreen; color: white; padding: 10px 20px; font-size: 1em; font-weight: bold; border: none; cursor: pointer; border-radius: 5px; }
+    .nav-btn:hover { background-color: #228B22; }
+</style>
+</head>
+<body>
+    <h1>Digital MAR Exit Test</h1>
+    <div id="survey-container">
+        <script>(function(t,e,s,n){var o,a,c;t.SMCX=t.SMCX||[],e.getElementById(n)||(o=e.getElementsByTagName(s),a=o[o.length-1],c=e.createElement(s),c.type="text/javascript",c.async=!0,c.id=n,c.src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd2IUF_2BzdC396tT6jqDxdOodX9xhs5KnAgU6wfxd7H28_2F.js",a.parentNode.insertBefore(c,a))})(window,document,"script","smcx-sdk");</script>
+        <a style="font: 12px Helvetica, sans-serif; color: #999; text-decoration: none;" href="https://www.surveymonkey.com">Create your own user feedback survey</a>
+    </div>
+
+    <div class="nav-section">
+        <p>If you did not score 100%, click below to retake the test or return to training.</p>
+        <button class="nav-btn" onclick="retakeTest()">Retake Test</button>
+        <button class="nav-btn" onclick="goToTraining()">Return to Training</button>
+    </div>
+
+    <script>
+        function retakeTest() {
+            location.reload(); // Reload page for fresh test
+        }
+        function goToTraining() {
+            window.location.href = 'index.html'; // Go back to training page
+        }
+    </script>
+</body>
+</html>
