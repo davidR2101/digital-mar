@@ -10,7 +10,7 @@
     p { color: #555; font-size: 1.2em; font-weight: bold; }
     #checkmark { display: none; font-size: 3em; color: forestgreen; margin-top: 20px; }
     #test-section { display: none; margin-top: 30px; }
-    #retake-section { display: none; margin-top: 30px; }
+    .retake-section { margin-top: 20px; }
     .retake-btn { background-color: forestgreen; color: white; padding: 10px 20px; font-size: 1em; font-weight: bold; border: none; cursor: pointer; border-radius: 5px; }
     .retake-btn:hover { background-color: #228B22; }
 </style>
@@ -29,16 +29,7 @@
 
     <!-- Test Section -->
     <div id="test-section">
-        <div id="survey-container">
-            <script id="smcx-sdk-script">(function(t,e,s,n){var o,a,c;t.SMCX=t.SMCX||[],e.getElementById(n)||(o=e.getElementsByTagName(s),a=o[o.length-1],c=e.createElement(s),c.type="text/javascript",c.async=!0,c.id=n,c.src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd2IUF_2BzdC396tT6jqDxdOodX9xhs5KnAgU6wfxd7H28_2F.js",a.parentNode.insertBefore(c,a))})(window,document,"script","smcx-sdk");</script>
-            <a style="font: 12px Helvetica, sans-serif; color: #999; text-decoration: none;" href="https://www.surveymonkey.com">Create your own user feedback survey</a>
-        </div>
-    </div>
-
-    <!-- Retake Section -->
-    <div id="retake-section">
-        <p>If you did not score 100%, please click link and try again.</p>
-        <button class="retake-btn" onclick="reloadSurvey()">Click here to retake test</button>
+        <div id="survey-container"></div>
     </div>
 
     <script>
@@ -61,22 +52,22 @@
             if (event.data === YT.PlayerState.ENDED) {
                 document.getElementById('checkmark').style.display = 'block';
                 document.getElementById('test-section').style.display = 'block';
-                document.getElementById('retake-section').style.display = 'block';
+                loadSurvey();
             }
         }
 
-        function reloadSurvey() {
+        function loadSurvey() {
             var container = document.getElementById('survey-container');
-            container.innerHTML = ''; // Remove old survey
+            container.innerHTML = ''; // Clear previous content
 
-            // Recreate script dynamically
+            // Create SurveyMonkey script dynamically
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.async = true;
             script.src = 'https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd2IUF_2BzdC396tT6jqDxdOodX9xhs5KnAgU6wfxd7H28_2F.js';
             container.appendChild(script);
 
-            // Add link again
+            // Add link
             var link = document.createElement('a');
             link.style.font = '12px Helvetica, sans-serif';
             link.style.color = '#999';
@@ -85,8 +76,24 @@
             link.textContent = 'Create your own user feedback survey';
             container.appendChild(link);
 
-            // Scroll back to test section
-            document.getElementById('test-section').scrollIntoView({ behavior: 'smooth' });
+            // Add retake section below
+            var retakeDiv = document.createElement('div');
+            retakeDiv.className = 'retake-section';
+
+            var instruction = document.createElement('p');
+            instruction.textContent = 'If you did not score 100%, please click link and try again.';
+            retakeDiv.appendChild(instruction);
+
+            var button = document.createElement('button');
+            button.className = 'retake-btn';
+            button.textContent = 'Click here to retake test';
+            button.onclick = function() {
+                loadSurvey(); // Reload survey for a fresh attempt
+                container.scrollIntoView({ behavior: 'smooth' });
+            };
+            retakeDiv.appendChild(button);
+
+            container.appendChild(retakeDiv);
         }
     </script>
 </body>
